@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Лесные эльфы, охрана дворца и злодеи</title>
+</head>
+<body>
+
+<h1>Лесные эльфы, охрана дворца и злодеи</h1>
+
+<p id="status">Нажмите "Начать игру"</p>
+
+<button onclick="startGame()">Начать игру</button>
+
+<script>
+    function startGame() {
+        var gold = 0;
+        var health = 100;
+        var isPlaying = true;
+
+        while(isPlaying) {
+            var action = prompt("Выберите действие:\n1 - Стать лесным эльфом и грабить корованы\n2 - Стать охраной дворца и поймать злодеев\n3 - Стать злодеем и грабить корованы\n4 - Закончить игру");
+            
+            switch(action) {
+                case "1":
+                    gold += 10;
+                    health -= getRandomNumber(10, 20);
+                    break;
+                case "2":
+                    gold += 5;
+                    health -= getRandomNumber(5, 10);
+                    break;
+                case "3":
+                    gold += 20;
+                    health -= getRandomNumber(5, 15);
+                    break;
+                case "4":
+                    isPlaying = false;
+                    break;
+                default:
+                    alert("Некорректный ввод. Пожалуйста, выберите действие от 1 до 4.");
+            }
+
+            if(health <= 0) {
+                isPlaying = false;
+                alert("Вы проиграли! Ваше здоровье исчерпано.");
+            }
+        }
+
+        document.getElementById("status").innerHTML = "Игра окончена. Вы заработали " + gold + " золота.";
+    }
+
+    function getRandomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+</script>
+
+</body>
+</html>
